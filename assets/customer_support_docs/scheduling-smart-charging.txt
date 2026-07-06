@@ -1,0 +1,17 @@
+Title: Scheduling and off-peak charging
+
+Charging sessions can be scheduled to run during off-peak electricity hours to reduce cost.
+
+To create a schedule:
+1. In the app, go to "Charger settings", then "Schedule".
+2. Select "Add schedule" and choose the days of the week.
+3. Enter the start and end times of the allowed charging window.
+4. Optionally set a maximum power for the schedule.
+5. Save. The charger will only deliver power during the configured window.
+
+If the vehicle is plugged in outside the scheduled window, the charger enters "waiting for schedule" state (pulsing white) and starts automatically when the window opens.
+
+Immediate charging override:
+Press and hold the button on the front of the charger for 3 seconds, or use the "Charge now" button in the app to bypass the schedule for the current session. The next session will follow the schedule again.
+
+Multiple schedules can be defined and prioritized. Overlapping schedules apply the most permissive rule.

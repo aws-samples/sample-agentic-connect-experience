@@ -1,0 +1,13 @@
+Title: Charger not starting a session
+
+If you plug in the vehicle and no charging session begins, follow these steps in order:
+
+1. Check the LED color. Red or pulsing red indicates a fault; consult the error codes reference.
+2. Verify that the vehicle is actually requesting to charge. Some vehicles have a scheduled charging feature that blocks immediate sessions.
+3. Check the app for a scheduled charging window that may be delaying the start.
+4. If the charger requires authorization (RFID card or app), confirm that authorization has been provided.
+5. Verify that the load management system is not throttling power to zero. In multi-charger installations, an overloaded panel can pause new sessions.
+6. Unplug the cable, wait 30 seconds, and reconnect firmly. A loose connection is a common cause.
+7. Try charging a different vehicle to determine whether the issue is with the charger or the vehicle.
+
+If none of these resolve the issue, capture the timestamp and error code and contact support.

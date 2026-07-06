@@ -1,0 +1,16 @@
+Title: LED status indicator reference
+
+The front LED ring communicates the current state of the charger. Colors and patterns:
+
+- Solid white: idle, ready to charge, no vehicle connected.
+- Pulsing white: vehicle connected, waiting for authorization or scheduled start.
+- Solid green: charging in progress.
+- Pulsing green: charging paused by the vehicle or by a smart charging schedule.
+- Solid blue: charging session complete, vehicle still connected.
+- Solid yellow: firmware update in progress. Do not disconnect power.
+- Pulsing yellow: warning condition, such as reduced power due to temperature or grid limits.
+- Solid red: error state. Check the app for the specific error code.
+- Pulsing red: safety fault, such as ground fault or over-current. Charging is disabled until the fault is cleared.
+- Off with no other indication: no power to the unit. Check the circuit breaker.
+
+The LED brightness can be adjusted in "Charger settings", "Display", including a night mode that dims automatically at a configurable time.

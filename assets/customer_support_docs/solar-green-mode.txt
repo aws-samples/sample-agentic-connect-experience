@@ -1,0 +1,17 @@
+Title: Solar and green energy charging modes
+
+If your installation includes solar panels, the charger can prioritize charging from surplus solar production.
+
+Available modes:
+- Fast: charges at maximum power regardless of solar production, drawing from grid as needed.
+- Eco: charges using a mix of solar and grid, but only when solar contribution is above a configurable percentage.
+- Full solar: charges only from surplus solar production. If solar drops below a threshold (typically 1.4 kW single-phase), the session pauses until sufficient production returns.
+- Scheduled: charges at defined times regardless of solar.
+
+Configuration:
+1. A compatible energy meter or inverter integration must be installed and detected by the charger.
+2. In the app, go to "Charger settings", then "Solar and green".
+3. Select the desired mode and configure thresholds.
+4. Confirm that the meter is reading correctly by comparing values to the inverter or utility meter.
+
+Full solar mode may result in longer overall session times, especially during winter or cloudy days. Consider Eco mode as a balance between cost and completion time.

@@ -1,0 +1,14 @@
+Title: Managing billing and payment methods
+
+Subscription plans and public charging session fees are charged to the payment method registered on your account.
+
+To add or update a payment method:
+1. Log in to the app or web portal.
+2. Go to "Account", then "Billing and payments".
+3. Select "Add payment method" or edit an existing one.
+4. Enter the card details. Supported cards are Visa, Mastercard, and American Express. Some regions also support SEPA direct debit.
+5. Confirm with 3D Secure if prompted by your bank.
+
+Invoices are issued monthly and are available under "Billing history" as downloadable PDFs. Failed payments trigger a retry after 3 days. After 2 failed retries, the subscription enters a suspended state and premium features become unavailable until the balance is settled.
+
+Refunds for public charging sessions can be requested within 60 days of the transaction from the "Session history" screen.

@@ -1,0 +1,17 @@
+Title: Wi-Fi connectivity troubleshooting
+
+The charger connects to your home Wi-Fi to receive commands, report status, and download firmware updates.
+
+Requirements:
+- 2.4 GHz Wi-Fi network. 5 GHz-only networks are not supported.
+- WPA2 or WPA3 encryption. Open networks are not supported for security reasons.
+- Signal strength of at least -70 dBm at the charger location. Weaker signals cause frequent disconnections.
+
+If the charger is offline:
+1. Verify that the router is powered on and other devices can reach the internet.
+2. Restart the router and wait 2 minutes.
+3. In the app, go to "Charger settings", "Network", and check the reported signal strength.
+4. If the signal is weak, consider a Wi-Fi extender or moving the router closer to the charger.
+5. If the network SSID or password has changed, re-provision the charger by removing it from the app and adding it again with the new credentials.
+
+Firewalls should allow outbound TCP 443 (HTTPS) and MQTT over TLS on port 8883.

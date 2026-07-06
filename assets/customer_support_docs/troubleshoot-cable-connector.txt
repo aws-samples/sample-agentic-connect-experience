@@ -1,0 +1,15 @@
+Title: Cable and connector issues
+
+Cables and connectors are wear items and can degrade over time. Symptoms of a failing cable:
+
+- The vehicle does not detect that the cable is plugged in.
+- Intermittent charging sessions that pause and resume without an error code.
+- Visible damage to the outer jacket, exposed conductors, or bent pins on the connector.
+- The connector feels unusually warm after a session (some warmth is normal; excessive heat is not).
+- The cable lock does not engage or release properly.
+
+Do not use a cable that shows visible damage. Damaged cables are a shock and fire hazard.
+
+For tethered chargers, replacement cables must match the original power rating and connector type (Type 2 in Europe, Type 1 or NACS in North America depending on the model). Only certified replacement parts should be used. Contact support to order a replacement.
+
+For untethered chargers (socket only), any certified Mode 3 cable of the correct current rating can be used.

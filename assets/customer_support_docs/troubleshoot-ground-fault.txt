@@ -1,0 +1,14 @@
+Title: Ground fault error (E002 / E009)
+
+Ground fault errors indicate that current is leaking to ground through a path other than the intended circuit. This is a safety-critical condition and charging is disabled until resolved.
+
+Do not attempt to bypass the fault detection or repeatedly reset the RCD. Ground faults can indicate wet connectors, damaged insulation, or a fault in the vehicle's charging system.
+
+Steps to diagnose:
+1. Disconnect the cable from the vehicle and inspect both connectors for moisture, dirt, or damage.
+2. Wipe connectors with a dry cloth. Never use water or solvents.
+3. Wait 5 minutes and reset the RCD in the electrical panel.
+4. Attempt a session with a different vehicle if available. If the fault only occurs with one vehicle, the vehicle likely has an internal issue and should be checked at a service center.
+5. If the fault occurs regardless of the vehicle, contact a certified electrician to inspect the installation and the charger.
+
+Repeated ground faults during rain may indicate that the charger is not correctly rated for its outdoor exposure. Verify the IP rating matches the installation environment.

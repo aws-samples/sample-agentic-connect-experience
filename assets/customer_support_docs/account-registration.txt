@@ -1,0 +1,12 @@
+Title: Creating and activating your account
+
+To use the mobile app and cloud portal for your EV charger, you need an active user account.
+
+Steps to create an account:
+1. Download the mobile app from the App Store or Google Play, or open the web portal.
+2. Select "Sign up" and enter your email address and a password of at least 10 characters, including one uppercase letter, one number, and one symbol.
+3. Accept the terms of service and privacy policy.
+4. Check your email for a verification message. Click the link within 24 hours to activate the account. If the link expires, request a new one from the login screen.
+5. After verification, log in and complete your profile with your country of residence and preferred language.
+
+If you do not receive the verification email within 10 minutes, check your spam folder and confirm that the address is spelled correctly. Corporate email filters may block automated messages; if this is the case, use a personal address or contact your IT department to allowlist the sender domain.

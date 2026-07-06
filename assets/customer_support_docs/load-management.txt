@@ -1,0 +1,14 @@
+Title: Dynamic load management
+
+Dynamic load management automatically adjusts the charging power based on the total consumption of the household or building, preventing the main breaker from tripping when other appliances draw high power.
+
+How it works:
+A current sensor (CT clamp) is installed on the main incoming line. The charger reads the sensor and calculates the available headroom in real time. If total consumption approaches the main breaker rating, the charger reduces its own draw. When other loads decrease, the charger returns to full power.
+
+Configuration:
+1. In the app, go to "Charger settings", then "Power management".
+2. Enter the main breaker rating of your installation in amps.
+3. Set a reserve margin (typically 5 amps) to allow for measurement tolerance.
+4. Save. The charger will automatically limit itself to the calculated available power.
+
+Multiple chargers in the same installation can share power through a designated primary unit. The primary unit distributes available capacity among all secondary units in proportion to their demand.

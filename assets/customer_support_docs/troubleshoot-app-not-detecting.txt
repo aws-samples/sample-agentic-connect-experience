@@ -1,0 +1,17 @@
+Title: App does not detect the charger
+
+If the mobile app cannot find your charger during setup or shows it as offline:
+
+Setup phase (Bluetooth):
+- Confirm the charger is powered on. The LED should be lit.
+- Confirm phone Bluetooth and location services are enabled. Location is required by the operating system for Bluetooth scanning.
+- Move within 3 meters of the charger.
+- Close and reopen the app.
+
+Post-setup (Wi-Fi):
+- Confirm the charger has an active internet connection. See the Wi-Fi troubleshooting article.
+- Check whether the charger is reported offline in the cloud portal from a browser; if it is offline there too, the issue is on the charger side, not the app.
+- Log out and log back in to the app to refresh the token.
+- Reinstall the app if issues persist.
+
+If the charger has been offline for more than 7 days, it may require a manual reconnection via Bluetooth to refresh the Wi-Fi credentials.

@@ -1,0 +1,51 @@
+[
+  {
+    "name": "UPDATE_TECHNICIAN_VISIT",
+    "description": "Collects the customer's preferred availability windows for a preventive technician visit, or records a decline. Call this tool when the customer provides one or more time ranges in which they would be available. If the customer explicitly declines the visit, set accepted to false and omit availability_windows. Do NOT call this tool if the customer is still undecided — continue the conversation instead.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "customer_address": {
+          "type": "string",
+          "description": "Customer's address used to initiate the flow – email address or mobile phone."
+        },
+        "accepted": {
+          "type": "boolean",
+          "description": "true if the customer agreed to schedule a technician visit, false if they explicitly declined."
+        },
+        "availability_windows": {
+          "type": "array",
+          "description": "A list of date and time ranges representing the customer's preferred availability for the technician visit. Only required when accepted is true. Infer the most reasonable ranges from the customer's input (e.g. 'Tuesday morning' becomes a range from next Tuesday 09:00 to 13:00; 'anytime Wednesday or Thursday afternoon' becomes two ranges).",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "description": "Start of the availability window in ISO 8601 format: YYYY-MM-DDTHH:MM. For example: 2026-06-18T09:00."
+              },
+              "end": {
+                "type": "string",
+                "description": "End of the availability window in ISO 8601 format: YYYY-MM-DDTHH:MM. Must be after start. For example: 2026-06-18T13:00."
+              }
+            },
+            "required": ["start", "end"]
+          }
+        }
+      },
+      "required": ["customer_address", "accepted"]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "CONFIRMED if the availability windows were recorded successfully, REJECTED if the customer rejected, or SCHEDULE_ERROR if the update failed."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Error description when status is SCHEDULE_ERROR."
+        }
+      }
+    }
+  }
+]

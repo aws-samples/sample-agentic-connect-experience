@@ -1,0 +1,18 @@
+Title: Rebooting the charger
+
+A reboot resolves many transient issues without affecting configuration or session history.
+
+Soft reboot (from the app):
+1. Open the app and select the charger.
+2. Go to "Charger settings", then "Advanced".
+3. Select "Restart charger" and confirm.
+4. The charger will restart within 30 seconds and be available again after about 90 seconds.
+
+Hard reboot (via power):
+1. Locate the dedicated circuit breaker for the charger in the electrical panel.
+2. Switch the breaker off.
+3. Wait at least 60 seconds. This ensures internal capacitors discharge.
+4. Switch the breaker back on.
+
+Factory reset:
+Only perform a factory reset if instructed by support. A factory reset erases Wi-Fi credentials, user pairings, and local configuration. The charger will need to be re-added to your account after a factory reset.

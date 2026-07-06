@@ -1,0 +1,19 @@
+Title: Energy consumption reports
+
+The app provides detailed reports on energy delivered, session durations, and estimated costs.
+
+To view reports:
+1. Open the app and select the charger.
+2. Go to "Sessions" or "Energy".
+3. Choose a time range: last 24 hours, week, month, or custom.
+4. The report shows total energy in kWh, session count, average session duration, and cost estimate based on the configured tariff.
+
+Exporting data:
+Reports can be exported as CSV from the web portal for use in spreadsheets or accounting software. The CSV includes per-session detail: start time, end time, energy in kWh, user, and cost.
+
+Configuring your tariff:
+1. Go to "Account", then "Tariff".
+2. Enter your energy price per kWh, and optionally define peak and off-peak periods for time-of-use pricing.
+3. Cost estimates in reports will use these values.
+
+Cost estimates are calculated from configured tariffs and do not reflect the actual utility bill, which may include additional fixed charges and taxes.

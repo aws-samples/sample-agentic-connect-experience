@@ -1,0 +1,17 @@
+Title: Firmware updates
+
+Firmware updates deliver new features, security patches, and bug fixes. Updates are pushed automatically over Wi-Fi or cellular during idle windows, typically between 02:00 and 05:00 local time.
+
+To check the current firmware version:
+1. Open the app and select the charger.
+2. Go to "Charger settings", then "About".
+3. The current firmware version, hardware revision, and last update date are listed.
+
+To trigger a manual update:
+1. Go to "Charger settings", then "Firmware".
+2. If a newer version is available, select "Update now".
+3. The charger must be idle. Any active session must be stopped first.
+4. The LED will pulse yellow during the update. Do not disconnect power.
+5. Updates typically take 5 to 15 minutes.
+
+If an update fails, the charger will roll back to the previous version automatically. If the LED remains solid red after a failed update, contact support and quote the current firmware version.

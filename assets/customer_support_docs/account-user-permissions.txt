@@ -1,0 +1,17 @@
+Title: Sharing charger access with other users
+
+You can grant access to your charger to family members, tenants, or fleet drivers.
+
+Access roles:
+- Owner: full control, including transferring ownership and deleting the charger.
+- Admin: can start and stop sessions, change configuration, and manage other users, but cannot transfer ownership.
+- User: can start and stop sessions and view their own session history.
+- Guest: single-session access via a temporary link, no account required.
+
+To invite a user:
+1. Go to "Charger settings", then "Users and access".
+2. Select "Invite user" and enter the email address.
+3. Choose the role and, if applicable, a validity period.
+4. The invited user receives an email with an activation link.
+
+Owners can revoke access at any time. Session history remains attributed to the user who started the session, even after their access is revoked.

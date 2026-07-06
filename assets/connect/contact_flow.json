@@ -1,0 +1,641 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Set logging",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -85.6,
+      "y": 96.8
+    },
+    "ActionMetadata": {
+      "Set voice": {
+        "position": {
+          "x": 1370.4,
+          "y": 448
+        },
+        "isFriendlyName": true,
+        "children": [
+          "Set voice-dDEVhDt1gD"
+        ],
+        "parameters": "${TTS_PARAMETERS}",
+        "overrideConsoleVoice": true,
+        "fragments": {
+          "SetContactData": "Set voice-dDEVhDt1gD"
+        },
+        "overrideLanguageAttribute": true
+      },
+      "Set voice-dDEVhDt1gD": {
+        "position": {
+          "x": 1370.4,
+          "y": 448
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LanguageCode": {
+            "useDynamic": true
+          }
+        },
+        "dynamicParams": [
+          "languageCode"
+        ]
+      },
+      "Connect assistant": {
+        "position": {
+          "x": 1609.6,
+          "y": 518.4
+        },
+        "isFriendlyName": true,
+        "children": [
+          "Connect assistant-a4JCzGtCzO"
+        ],
+        "parameters": {
+          "OrchestrationAIAgentConfiguration": {
+            "AgentAssistanceAgentVersionArn": {
+              "useAIAgentDropdown": true,
+              "aiAgentName": "CustomerSupportAgent"
+            }
+          }
+        },
+        "fragments": {
+          "SetContactData": "Connect assistant-a4JCzGtCzO"
+        },
+        "useAIAgentDropdown": true,
+        "aiAgentName": "CustomerSupportAgent"
+      },
+      "Connect assistant-a4JCzGtCzO": {
+        "position": {
+          "x": 1609.6,
+          "y": 518.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Disconnect 2": {
+        "position": {
+          "x": 1723.2,
+          "y": 1480.8
+        },
+        "isFriendlyName": true
+      },
+      "Check contact attributes": {
+        "position": {
+          "x": 852,
+          "y": 1071.2
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "3c6503eb-ed51-4e4b-a4c2-8c30efeb130d",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "COMPLETE"
+          },
+          {
+            "id": "979dcd94-e720-4d59-903a-23ebf0ae4134",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "ESCALATE"
+          }
+        ]
+      },
+      "Escalate": {
+        "position": {
+          "x": 1156.8,
+          "y": 1176.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "displayName": "Escalation Queue"
+          }
+        },
+        "queue": {
+          "text": "Escalation Queue"
+        }
+      },
+      "Get customer input": {
+        "position": {
+          "x": 571.2,
+          "y": 1000.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LexV2Bot": {
+            "AliasArn": {
+              "displayName": "Prod",
+              "useLexBotDropdown": true,
+              "lexV2BotName": "AgenticConnectBot"
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "x-amz-lex:q-in-connect:ai-agent-arn": false,
+          "x-amz-lex:q-in-connect:session-arn": false,
+          "x-amz-lex:audio:start-timeout-ms:*:*": false,
+          "x-amz-lex:audio:end-timeout-ms:*:*": false,
+          "x-amz-lex:audio:max-length-ms:*:*": false
+        },
+        "useLexBotDropdown": true,
+        "lexV2BotName": "AgenticConnectBot",
+        "lexV2BotAliasName": "Prod",
+        "conditionMetadata": []
+      },
+      "Play error message 2": {
+        "position": {
+          "x": 1432,
+          "y": 1410.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Text": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "c7eb84c7-93a9-474f-a8a7-3d0ac8aed859": {
+        "position": {
+          "x": 281.6,
+          "y": 930.4
+        },
+        "parameters": {
+          "Text": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Load lang config": {
+        "position": {
+          "x": 818.4,
+          "y": 307.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "DataTableId": {
+            "displayName": "${DATA_TABLE_NAME}"
+          }
+        }
+      },
+      "Get profile": {
+        "position": {
+          "x": 1092.8,
+          "y": 377.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "ProfileRequestData": {
+            "IdentifierName": {
+              "displayName": "Phone"
+            }
+          }
+        },
+        "useDynamic": {
+          "IdentifierName": true
+        },
+        "customerProfilesAction": "GetCustomerProfile"
+      },
+      "Update session data": {
+        "position": {
+          "x": 1856,
+          "y": 588.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "ConnectStack-ConnectPatternFuncUpdateSessionData82-guZ0N1Iizf71"
+          },
+          "LambdaInvocationAttributes": {
+            "language_name": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "language_name": true,
+          "customer_address": false
+        }
+      },
+      "Disconnect": {
+        "position": {
+          "x": 2396.8,
+          "y": 764.8
+        },
+        "isFriendlyName": true
+      },
+      "Set country code": {
+        "position": {
+          "x": 536.8,
+          "y": 236.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Attributes": {
+            "country_code": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "country_code"
+        ]
+      },
+      "Play error message": {
+        "position": {
+          "x": 2131.2,
+          "y": 694.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Text": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Extract country code": {
+        "position": {
+          "x": 289.6,
+          "y": 166.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "AgenticConnectStack-ConnectPatternFuncExtractCount-7MjvWkfuQ8YG"
+          }
+        },
+        "dynamicMetadata": {}
+      },
+      "Set logging": {
+        "position": {
+          "x": 36.8,
+          "y": 96
+        },
+        "isFriendlyName": true
+      }
+    },
+    "Annotations": [],
+    "name": "${CONTACT_FLOW_NAME}",
+    "description": "3c1f4ee4",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": "${VOICE_PARAMETERS}",
+      "Identifier": "Set voice",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "Set voice-dDEVhDt1gD",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LanguageCode": "$.DataTables.LangConfig.language_code"
+      },
+      "Identifier": "Set voice-dDEVhDt1gD",
+      "Type": "UpdateContactData",
+      "Transitions": {
+        "NextAction": "Connect assistant",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "WisdomAssistantArn": "${WISDOM_ASSISTANT_ARN}",
+        "OrchestrationAIAgentConfiguration": {
+          "AgentAssistanceAgentVersionArn": "${AI_AGENT_VERSION_ARN}"
+        }
+      },
+      "Identifier": "Connect assistant",
+      "Type": "CreateWisdomSession",
+      "Transitions": {
+        "NextAction": "Connect assistant-a4JCzGtCzO",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "WisdomSessionArn": "$.Wisdom.SessionArn"
+      },
+      "Identifier": "Connect assistant-a4JCzGtCzO",
+      "Type": "UpdateContactData",
+      "Transitions": {
+        "NextAction": "Update session data",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "Disconnect 2",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Lex.SessionAttributes.Tool"
+      },
+      "Identifier": "Check contact attributes",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Play error message 2",
+        "Conditions": [
+          {
+            "NextAction": "Disconnect 2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "COMPLETE"
+              ]
+            }
+          },
+          {
+            "NextAction": "Escalate",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "ESCALATE"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Play error message 2",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "${ESCALATION_QUEUE_ARN}"
+      },
+      "Identifier": "Escalate",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Disconnect 2",
+        "Errors": [
+          {
+            "NextAction": "Play error message 2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": " ",
+        "LexV2Bot": {
+          "AliasArn": "${LEX_BOT_ALIAS_ARN}"
+        },
+        "LexSessionAttributes": {
+          "x-amz-lex:q-in-connect:ai-agent-arn": "${AI_AGENT_VERSION_ARN}",
+          "x-amz-lex:q-in-connect:session-arn": "$.Wisdom.SessionArn",
+          "x-amz-lex:audio:start-timeout-ms:*:*": "5000",
+          "x-amz-lex:audio:end-timeout-ms:*:*": "1500",
+          "x-amz-lex:audio:max-length-ms:*:*": "30000"
+        }
+      },
+      "Identifier": "Get customer input",
+      "Type": "ConnectParticipantWithLexBot",
+      "Transitions": {
+        "NextAction": "Play error message 2",
+        "Errors": [
+          {
+            "NextAction": "Check contact attributes",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Play error message 2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SkipWhenDTMFBufferEnabled": "false",
+        "Text": "$.DataTables.LangConfig.error_message"
+      },
+      "Identifier": "Play error message 2",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Disconnect 2",
+        "Errors": [
+          {
+            "NextAction": "Disconnect 2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SkipWhenDTMFBufferEnabled": "false",
+        "Text": "$.DataTables.LangConfig.welcome_prompt"
+      },
+      "Identifier": "c7eb84c7-93a9-474f-a8a7-3d0ac8aed859",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Get customer input",
+        "Errors": [
+          {
+            "NextAction": "Play error message 2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "DataTableId": "${DATA_TABLE_ID}",
+        "Queries": [
+          {
+            "QueryName": "LangConfig",
+            "Attributes": [
+              "welcome_prompt",
+              "language_code",
+              "language_name",
+              "amazon_voice",
+              "deepgram_voice",
+              "error_message",
+              "amazon_speaking_engine",
+              "amazon_speaking_style"
+            ],
+            "PrimaryValues": [
+              {
+                "AttributeName": "country_code",
+                "Value": "$.Attributes.country_code"
+              }
+            ]
+          }
+        ]
+      },
+      "Identifier": "Load lang config",
+      "Type": "EvaluateDataTableValues",
+      "Transitions": {
+        "NextAction": "Get profile",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ProfileRequestData": {
+          "IdentifierName": "_phone",
+          "IdentifierValue": "$.CustomerEndpoint.Address"
+        },
+        "ProfileResponseData": [
+          "AccountNumber"
+        ]
+      },
+      "Identifier": "Get profile",
+      "Type": "GetCustomerProfile",
+      "Transitions": {
+        "NextAction": "Set voice",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          },
+          {
+            "NextAction": "Set voice",
+            "ErrorType": "MultipleFoundError"
+          },
+          {
+            "NextAction": "Set voice",
+            "ErrorType": "NoneFoundError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "${SESSION_DATA_UPDATER_FUNC_ARN}",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": "${SESSION_DATA_ATTRS}",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Update session data",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "c7eb84c7-93a9-474f-a8a7-3d0ac8aed859",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "Disconnect",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "country_code": "$.External.country_code"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set country code",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Load lang config",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SkipWhenDTMFBufferEnabled": "false",
+        "Text": "$.DataTables.LangConfig.error_message"
+      },
+      "Identifier": "Play error message",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Disconnect",
+        "Errors": [
+          {
+            "NextAction": "Disconnect",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "${COUNTRY_CODE_EXTRACTOR_FUNC_ARN}",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Extract country code",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set country code",
+        "Errors": [
+          {
+            "NextAction": "Play error message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "Set logging",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "Extract country code"
+      }
+    }
+  ]
+}

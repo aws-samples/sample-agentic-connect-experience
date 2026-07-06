@@ -1,0 +1,16 @@
+Title: Common error codes reference
+
+Error codes are displayed in the mobile app and cloud portal under the charger status.
+
+E001 - Communication error between charger and vehicle. Try disconnecting and reconnecting the cable.
+E002 - Ground fault detected. Do not attempt to charge. Contact a certified electrician.
+E003 - Over-voltage on the input line. Wait for grid stabilization or check the installation.
+E004 - Under-voltage on the input line. Same as E003.
+E005 - Over-current on the output. May indicate a faulty cable or vehicle. Test with a different vehicle if possible.
+E006 - Temperature limit reached. Charger is throttling. Ensure the unit is not exposed to direct sunlight in high ambient temperature.
+E007 - Emergency stop button engaged. Release the button on the unit.
+E008 - Meter communication lost. Restart the charger.
+E009 - RCD (residual current device) tripped. Reset the breaker. If it trips again, do not use the charger and contact support.
+E010 - Firmware corrupted. Contact support for recovery instructions.
+E011 - Cable lock actuator failure. Do not force the connector. Contact support.
+E012 - Load management controller unreachable. Check network connectivity.

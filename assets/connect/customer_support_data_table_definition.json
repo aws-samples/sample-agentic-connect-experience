@@ -1,0 +1,22 @@
+{
+  "+34": {
+    "language_code": "es-ES",
+    "language_name": "Spanish",
+    "deepgram_voice": "nestor",
+    "amazon_voice": "Sergio",
+    "amazon_speaking_engine": "Neural",
+    "amazon_speaking_style": "None",
+    "welcome_prompt": "Bienvenido, ¿en qué podemos ayudarle?",
+    "error_message": "Estamos experimentando un problema técnico. Le devolveremos la llamada en breve — disculpe las molestias."
+  },
+  "+1": {
+    "language_code": "en-US",
+    "language_name": "English",
+    "deepgram_voice": "arcas",
+    "amazon_voice": "Matthew",
+    "amazon_speaking_engine": "Neural",
+    "amazon_speaking_style": "Conversational",
+    "welcome_prompt": "Welcome, how can we help you?",
+    "error_message": "We're currently experiencing a technical issue. We'll call you back shortly — apologies for the inconvenience."
+  }
+}

@@ -1,0 +1,18 @@
+Title: Installation prerequisites
+
+Chargers must be installed by a certified electrician. Attempting to install the unit yourself voids the warranty and may violate local electrical codes.
+
+Before installation, confirm:
+- A dedicated circuit is available. Do not share the charger circuit with other appliances.
+- The circuit breaker rating matches the charger model (typically 16A, 32A, or 40A).
+- The RCD (Type A EV or Type B) is installed, per local regulations.
+- The installation location is within cable reach of the vehicle's charging port when parked normally.
+- For outdoor installations, the mounting surface allows for proper drainage away from the unit.
+- The mains supply voltage matches the charger rating (230V single-phase or 400V three-phase).
+
+The installer will need:
+- The installation manual specific to the charger model.
+- Access to the electrical panel and any relevant permits.
+- A network connection (Wi-Fi or Ethernet) for the initial cloud configuration.
+
+After installation, the electrician should provide a completion certificate that includes the earth loop impedance measurement and the insulation resistance test result.

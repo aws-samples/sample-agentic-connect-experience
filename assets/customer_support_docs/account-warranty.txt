@@ -1,0 +1,18 @@
+Title: Warranty registration and coverage
+
+Standard warranty covers 3 years on the charger unit and 2 years on the cable, starting from the date of purchase.
+
+To register your warranty:
+1. Log in to the app.
+2. Go to "Account", then "My chargers".
+3. Select the charger and choose "Register warranty".
+4. Upload a copy of the purchase invoice showing the date, retailer, and serial number.
+5. The warranty status will update to "Registered" within 3 business days.
+
+Warranty does not cover:
+- Damage from improper installation by a non-certified electrician.
+- Damage from voltage surges when no surge protection is present in the installation.
+- Cosmetic damage that does not affect function.
+- Consumable parts such as gaskets after normal wear.
+
+Extended warranty options up to 5 years are available for purchase within the first 12 months from the date of activation.

@@ -1,0 +1,12 @@
+Title: Charging slower than expected
+
+Charging speed depends on the charger, the vehicle, and the installation. Reasons a session may be slower than the rated maximum:
+
+- The vehicle has a lower on-board charger capacity than the wall charger. Check the vehicle documentation for its AC charging limit.
+- The battery state of charge is above 80 percent. Most EVs slow down charging near full to protect the battery.
+- The battery or ambient temperature is low. Cold batteries accept less power until they warm up.
+- The installation is dynamic load-managed and the household is drawing significant power from other appliances.
+- The charger is throttling due to high internal temperature. Ensure adequate ventilation and no direct sunlight.
+- A scheduled charging profile is limiting the output power during off-peak hours.
+
+To confirm the maximum achievable rate, run a session while other loads are minimized and the battery is between 20 and 60 percent state of charge.

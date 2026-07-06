@@ -1,0 +1,18 @@
+Title: RFID card authorization
+
+For chargers configured to require authorization, an RFID card must be presented before a session starts. This is common in fleet, workplace, and shared parking installations.
+
+To enroll an RFID card:
+1. Go to "Charger settings", then "Access control".
+2. Select "Add RFID card".
+3. Present the card to the reader on the charger within 30 seconds.
+4. The app confirms enrollment and lets you assign the card to a specific user.
+
+To use an enrolled card:
+1. Plug in the vehicle.
+2. Present the card to the reader area (usually indicated by a card icon on the housing).
+3. The LED will briefly flash green to confirm and the session will start.
+
+Cards can be revoked at any time from the same menu. Revoking a card takes effect immediately for connected chargers and within a few minutes for chargers that have lost internet connectivity, once they reconnect.
+
+If a card is not recognized, verify that it uses a compatible MIFARE Classic or MIFARE DESFire standard.

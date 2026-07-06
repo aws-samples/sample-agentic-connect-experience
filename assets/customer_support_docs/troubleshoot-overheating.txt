@@ -1,0 +1,17 @@
+Title: Overheating and thermal throttling
+
+When the internal temperature of the charger exceeds safe limits, it will reduce output power or pause the session. This is normal protective behavior.
+
+Common causes:
+- Direct exposure to sunlight in high ambient temperatures.
+- Installation in an enclosed space without airflow, such as a small closet.
+- Blocked ventilation slots on the housing.
+- Prolonged charging at maximum power on a hot day.
+
+Mitigation:
+- Install a sun shade or relocate the charger to a shaded area.
+- Ensure at least 30 cm of clearance around the top and sides of the unit.
+- Clean any dust from the ventilation slots with compressed air (never insert objects).
+- For garages, consider passive ventilation.
+
+The charger will resume full power automatically when the temperature drops. No user action is required to reset a thermal throttle. If the yellow warning LED persists for more than 30 minutes on a cool day, contact support.

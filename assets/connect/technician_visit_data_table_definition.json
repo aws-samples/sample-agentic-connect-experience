@@ -1,0 +1,22 @@
+{
+  "+34": {
+    "language_code": "es-ES",
+    "language_name": "Spanish",
+    "deepgram_voice": "nestor",
+    "amazon_voice": "Enrique",
+    "amazon_speaking_engine": "Neural",
+    "amazon_speaking_style": "None",
+    "welcome_prompt": "Hola, le habla el servicio de atención al cliente. Nuestro sistema de monitorización está detectando indicios tempranos de que su cargador podría necesitar revisión. No hay ningún problema inmediato, pero nos gustaría enviar a un técnico para una revisión preventiva. ¿Podría indicarnos un par de horarios que le vengan bien en la próxima semana aproximadamente?",
+    "error_message": "Estamos experimentando un problema técnico. Le devolveremos la llamada en breve — disculpe las molestias."
+  },
+  "+1": {
+    "language_code": "en-US",
+    "language_name": "English",
+    "deepgram_voice": "arcas",
+    "amazon_voice": "Matthew",
+    "amazon_speaking_engine": "Neural",
+    "amazon_speaking_style": "Conversational",
+    "welcome_prompt": "Hi, this is customer support. Our monitoring is picking up early signs that your charger may need attention. There's no immediate concern, but we'd like to send a technician for a preventive check. Could you share a couple of times that would work for you in the next week or so?",
+    "error_message": "We're currently experiencing a technical issue. We'll call you back shortly — apologies for the inconvenience."
+  }
+}

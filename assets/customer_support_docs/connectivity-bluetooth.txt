@@ -1,0 +1,16 @@
+Title: Bluetooth pairing
+
+Bluetooth is used during the initial setup to configure Wi-Fi credentials and for local control when the internet is unavailable.
+
+To pair over Bluetooth:
+1. Make sure Bluetooth is enabled on your phone.
+2. Open the app and select "Add charger" or "Reconnect".
+3. Bring the phone within 3 meters of the charger.
+4. When prompted, confirm the 6-digit code shown on both the app and the LED ring blink pattern.
+
+Common issues:
+- Phone does not detect the charger: force-close and reopen the app, or toggle Bluetooth off and on.
+- Pairing code does not match: someone else may be pairing with a nearby charger. Cancel and retry.
+- Frequent disconnections: check that no other Bluetooth device is connected to the charger. The charger supports one Bluetooth session at a time.
+
+Bluetooth pairing is only required for setup and diagnostics; day-to-day operation happens over Wi-Fi.

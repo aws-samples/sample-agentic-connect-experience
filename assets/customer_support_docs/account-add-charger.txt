@@ -1,0 +1,14 @@
+Title: Adding a charger to your account
+
+Every charger must be linked to a user account before it can be controlled remotely or receive firmware updates.
+
+Steps to add a charger:
+1. Log in to the app.
+2. From the main screen, select "Add charger".
+3. Choose the model of your charger from the list.
+4. Enter the 8-character serial number, which is printed on a sticker on the side of the unit and on the packaging.
+5. The app will attempt to connect over Bluetooth. Make sure the charger is powered on and you are within 3 meters of the unit.
+6. Follow the guided setup to connect the charger to your Wi-Fi network.
+7. Assign a name to the charger for easier identification.
+
+A charger can only be linked to one account at a time. If the charger was previously used by a different owner, you must ask the previous owner to unlink it, or contact support with proof of purchase to have the previous link released.
