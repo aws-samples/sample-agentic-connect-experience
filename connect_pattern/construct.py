@@ -36,6 +36,11 @@ class ConnectPattern(Construct):
 
     _ASSETS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets')
 
+    def _get_voice_provider_secret(self):
+        return self._voice_provider_secrets.get(self.voice_provider)
+
+    voice_provider_secret = property(_get_voice_provider_secret)
+
     def __init__(self, scope: Construct, construct_id: str, props: ConnectPatternProps):
         super().__init__(scope, construct_id)
 
@@ -48,7 +53,8 @@ class ConnectPattern(Construct):
         self.country_code_extractor_func = self._create_country_code_extractor_function(props)
         self.assistant, assistant_association = self._create_assistant()
         self.bot_alias = self._create_lex_bot(props)
-        self.agents: Dict[str: wisdom.CfnAIAgent] = {}
+        self._voice_provider_secrets = {provider: self._create_secret(provider) for provider in ['deepgram', 'elevenlabs']}
+        self.agents: Dict[str, wisdom.CfnAIAgent] = {}
 
         if props.phone_number:
             self.phone_number = self._claim_phone_number(props)
@@ -59,12 +65,6 @@ class ConnectPattern(Construct):
             self.escalation_queue = self._create_escalation_queue(props)
         else:
             self.escalation_queue = None
-
-        if props.voice_provider == 'deepgram':
-            self.deepgram_secret = self._create_deepgram_secret()
-            CfnOutput(self, 'DeepgramSecretArn', value=self.deepgram_secret.secret_arn)
-        else:
-            self.deepgram_secret = None
 
         if props.admin_user:
             self._create_admin_user(props)
@@ -80,6 +80,9 @@ class ConnectPattern(Construct):
 
             self._create_security_profile_for_agent(agent, tool_configs)
             self.agents[agent_props.name] = agent
+
+        for provider, secret in self._voice_provider_secrets.items():
+            CfnOutput(self, f'{provider.capitalize()}SecretArn', value=secret.secret_arn)
 
     def _create_instance(self, props: ConnectPatternProps):
         if props.instance.arn is not None:
@@ -619,14 +622,14 @@ class ConnectPattern(Construct):
         associate_sp.node.add_dependency(agent)
         associate_sp.node.add_dependency(security_profile)
 
-    def _create_deepgram_secret(self):
-        deepgram_kms_key = kms.Key(
-            self, "DeepgramSecretKey",
+    def _create_secret(self, voice_provider):
+        kms_key = kms.Key(
+            self, f"{voice_provider}SecretKey",
             enable_key_rotation=True,
-            removal_policy=RemovalPolicy.RETAIN,
+            removal_policy=RemovalPolicy.DESTROY,
         )
 
-        deepgram_kms_key.add_to_resource_policy(
+        kms_key.add_to_resource_policy(
             iam.PolicyStatement(
                 sid="AllowLexDecrypt",
                 effect=iam.Effect.ALLOW,
@@ -642,14 +645,14 @@ class ConnectPattern(Construct):
             )
         )
 
-        deepgram_secret = secretsmanager.Secret(
-            self, "DeepgramApiKey",
-            description="Deepgram API key for STT/TTS",
-            encryption_key=deepgram_kms_key,
-            removal_policy=RemovalPolicy.RETAIN,
+        secret = secretsmanager.Secret(
+            self, f"{voice_provider}ApiKey",
+            description=f"{voice_provider} API key for STT/TTS",
+            encryption_key=kms_key,
+            removal_policy=RemovalPolicy.DESTROY,
         )
 
-        deepgram_secret.add_to_resource_policy(
+        secret.add_to_resource_policy(
             iam.PolicyStatement(
                 sid="LexTrust",
                 effect=iam.Effect.ALLOW,
@@ -664,7 +667,7 @@ class ConnectPattern(Construct):
             )
         )
 
-        return deepgram_secret
+        return secret
 
     def _register_lambda_function_as_tool(self, tool: ConnectPatternProps.McpTool):
         target_name = tool.function.function_name

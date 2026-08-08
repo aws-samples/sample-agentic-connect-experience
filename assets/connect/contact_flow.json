@@ -482,14 +482,16 @@
           {
             "QueryName": "LangConfig",
             "Attributes": [
-              "welcome_prompt",
               "language_code",
               "language_name",
-              "amazon_voice",
-              "deepgram_voice",
+              "welcome_prompt",
               "error_message",
-              "amazon_speaking_engine",
-              "amazon_speaking_style"
+              "amazon_voice",
+              "amazon_model",
+              "deepgram_voice",
+              "deepgram_model",
+              "elevenlabs_voice",
+              "elevenlabs_model"
             ],
             "PrimaryValues": [
               {

@@ -11,7 +11,7 @@ The intent is that consumers of the pattern describe the experience they want as
 - [What the pattern does](#what-the-pattern-does)
 - [How a contact flows through the components](#how-a-contact-flows-through-the-components)
 - [Highlighted features](#highlighted-features)
-  - [Deepgram voice integration](#deepgram-voice-integration)
+  - [Deepgram and ElevenLabs voice integration](#deepgram-and-elevenlabs-voice-integration)
   - [Multi-language support via Connect Data Tables](#multi-language-support-via-connect-data-tables)
   - [Automatic country-code extraction with fallback](#automatic-country-code-extraction-with-fallback)
   - [Multiple AI agents with knowledge base and MCP tools](#multiple-ai-agents-with-knowledge-base-and-mcp-tools)
@@ -35,7 +35,7 @@ Provisioning a modern Connect experience today means stitching together a dozen 
 - For each agent that requests knowledge-base retrieval, stands up an AppIntegrations `DataIntegration` on the provided S3 bucket, a Wisdom knowledge base, and the assistant association — plus the `Retrieve` tool binding on the orchestration agent.
 - Creates a Connect Security Profile per AI agent with `Wisdom.View` and one MCP application permission per registered tool, then associates the profile with the AI agent (which the underlying CFN types don't natively support).
 - Injects two operational Lambdas that every Connect contact flow uses: a session-data updater (populates the Q in Connect `$.Custom.*` variables the orchestration prompts reference) and a country-code extractor (used to look up the caller's `LangConfig` row and drive dynamic language routing).
-- Optionally provisions a Secrets Manager–backed Deepgram API key with the KMS and resource policy grants required by both Lex and Connect.
+- Provisions two Secrets Manager–backed Deepgram and ElevenLabs API keys with the KMS and resource policy grants required by both Lex and Connect.
 - Optionally creates a Connect admin user with a password sourced from a `SecretValue`.
 
 Everything is opt-in — the pattern only creates what the props ask for.
@@ -77,30 +77,32 @@ For outbound flows the top of the diagram is different — the `FuncStartOutboun
 
 ## Highlighted features
 
-### Deepgram voice integration
+### [Deepgram](https://deepgram.com/) and [ElevenLabs](https://elevenlabs.io/) voice integration
 
-Setting `voice_provider='deepgram'` on `ConnectPatternProps` provisions a Secrets Manager secret encrypted with a KMS key, and grants Lex and Connect the ability to decrypt and read it. The secret is created empty; put your Deepgram API key in it after the first deploy — the ARN is exported via a stack output (`DeepgramSecretArn`).
+`ConnectPattern` provisions two Secrets Manager secrets encrypted with a KMS key to hold your Deepgram and ElevenLabs API keys, and grants Lex and Connect the ability to decrypt and read them. The secrets are created empty; put your keys in them after the first deploy — the ARNs are exported via stack outputs (`DeepgramSecretArn` and `ElevenLabsSecretArn`).
 
-Contact flows read Deepgram-specific voice parameters (`deepgram_voice` per language, `deepgram:aura-2` engine, external credential ARN) from the Data Table row corresponding to the caller's country code, so the voice used to speak to each caller is chosen at contact time from the customer's language configuration.
+Setting `voice_provider='deepgram'` or `voice_provider='elevenlabs'` on `ConnectPatternProps` makes contact flows read Deepgram and ElevenLabs specific voice parameters (voice id and model) from the Data Table row corresponding to the caller's country code, so the voice used to speak to each caller is chosen at contact time from the customer's language configuration.
 
-The alternative provider is `amazon`, which maps the same Data Table columns to Polly Neural voices with per-language engine and style overrides.
+The alternative provider is `amazon`, which maps the same Data Table columns to [Amazon Connect Agentic Voices](https://docs.aws.amazon.com/connect/latest/adminguide/agentic-voice.html) with per-language overrides.
 
 ### Multi-language support via Connect Data Tables
 
-Language configuration lives in Connect Data Tables — one row per country code, each row carrying the language name, language code, TTS voice IDs (Deepgram and Amazon), welcome prompt, and error message. The sample stack ships two rows:
+Language configuration lives in Connect Data Tables — one row per country code, each row carrying the language name, language code, TTS voice IDs (Deepgram, ElevenLabs and Amazon), welcome prompt, and error message. The sample stack ships two rows:
 
 The two rows shipped with the sample stack look like this once loaded into the `CustomerSupportDataTable`:
 
-| Attribute | `+34` (Spain) | `+1` (US / Canada / NANP) |
-|---|---|---|
-| `language_code` | `es-ES` | `en-US` |
-| `language_name` | Spanish | English |
-| `deepgram_voice` | `nestor` | `arcas` |
-| `amazon_voice` | `Sergio` | `Matthew` |
-| `amazon_speaking_engine` | `Neural` | `Neural` |
-| `amazon_speaking_style` | `None` | `Conversational` |
-| `welcome_prompt` | Bienvenido, ¿en qué podemos ayudarle? | Welcome, how can we help you? |
-| `error_message` | Estamos experimentando un problema técnico. Le devolveremos la llamada en breve. | We're currently experiencing a technical issue. We'll call you back shortly. |
+| Attribute               | `+34` (Spain)                                                                    | `+1` (US / Canada / NANP)                                                    |
+|-------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `language_code`         | `es-ES`                                                                          | `en-US`                                                                      |
+| `language_name`         | Spanish                                                                          | English                                                                      |
+| `deepgram_voice`        | `nestor`                                                                         | `arcas`                                                                      |
+| `deepgram_model`        | `deepgram:aura-2`                                                                | `deepgram:aura-2`                                                            |
+| `elevenlabs_voice`      | `gc61tTk93h3LBXPxew2V`                                                           | `s3TPKV1kjDlVtZbl4Ksh`                                                       |
+| `elevenlabs_model`      | `elevenlabs:eleven_flash_v2_5`                                                   | `elevenlabs:eleven_flash_v2_5`                                               |
+| `amazon_voice`          | `MARCOS`                                                                         | `BLAKE`                                                                      |
+| `amazon_model`          | `connect:agentic`                                                                | `connect:agentic`                                                            |
+| `welcome_prompt`        | Bienvenido, ¿en qué podemos ayudarle?                                            | Welcome, how can we help you?                                                |
+| `error_message`         | Estamos experimentando un problema técnico. Le devolveremos la llamada en breve. | We're currently experiencing a technical issue. We'll call you back shortly. |
 
 The row is described in `assets/connect/customer_support_data_table_definition.json` as a plain dict keyed by country code, and the pattern turns each key into a `CfnDataTableRecord` with `country_code` as the primary attribute.
 
@@ -184,17 +186,17 @@ Both experiences share the same templated `contact_flow.json`, parametrized at s
 
 `ConnectPatternProps` is a dataclass with the following top-level fields (all defined in `connect_pattern/props.py`):
 
-| Field | Required | Purpose |
-|---|---|---|
+| Field | Required | Purpose                                                                                                     |
+|---|---|-------------------------------------------------------------------------------------------------------------|
 | `instance` | yes | Instance alias, optional pre-existing ARN, Customer Profiles rule-based matching config, Connect attributes |
-| `lex_bot` | yes | Name, locales, optional SLR creation for `lexv2.amazonaws.com` |
-| `country_code_detection_fallback` | yes | E.164 code the extractor Lambda returns when parsing fails |
-| `data_tables` | yes (has default) | List of `DataTable`s keyed by country code |
-| `voice_provider` | no (`amazon` default) | `amazon` or `deepgram` |
-| `phone_number` | no | Country code and phone type to claim |
-| `escalation_queue` | no | Time zone plus hours-of-operation config |
-| `admin_user` | no | Username and `SecretValue` password |
-| `agents` | no | List of `Agent`s |
+| `lex_bot` | yes | Name, locales, optional SLR creation for `lexv2.amazonaws.com`                                              |
+| `country_code_detection_fallback` | yes | E.164 code the extractor Lambda returns when parsing fails                                                  |
+| `data_tables` | yes (has default) | List of `DataTable`s keyed by country code                                                                  |
+| `voice_provider` | no (`amazon` default) | `amazon`, `deepgram` or `elevenlabs`                                                                        |
+| `phone_number` | no | Country code and phone type to claim                                                                        |
+| `escalation_queue` | no | Time zone plus hours-of-operation config                                                                    |
+| `admin_user` | no | Username and `SecretValue` password                                                                         |
+| `agents` | no | List of `Agent`s                                                                                            |
 
 Each `Agent` carries a `name`, an `ORCHESTRATION` `Prompt` (name, model ID, template text), an optional S3 bucket as `retrieve_tool_target`, and a list of `McpTool`s (each combining a Lambda function, an AgentCore tool schema, and a tool name).
 
@@ -239,6 +241,7 @@ Deploying the sample stack materializes roughly the following (some via native L
 - 1 AppIntegrations `MCP_SERVER` application, 1 Connect `APPLICATION` integration association
 - 2 Connect Security Profiles (one per AI agent), each associated with its agent via `Connect.associateSecurityProfiles`
 - 1 Deepgram Secrets Manager secret with dedicated KMS key
+- 1 ElevenLabs Secrets Manager secret with dedicated KMS key
 - Operational Lambdas: session-data updater, country-code extractor, gateway-audience updater, Lex-build waiter (on_event + is_complete), admin user handler, technician-visit updater, outbound-call starter
 - 2 contact flows (customer support inbound, technician visit outbound)
 - 1 S3 bucket for the KB corpus (with 24 uploaded documents), 1 DynamoDB table for technician-visit records
@@ -265,12 +268,12 @@ cdk deploy AgenticConnectStack \
     --parameters ConnectAdminPassword=<your-admin-password>
 ```
 
-After the stack settles, populate the Deepgram secret if using `voice_provider='deepgram'`:
+After the stack settles, populate the Deepgram or ElevenLabs secret if using `voice_provider='deepgram'` or `voice_provider='elevenlabs'`:
 
 ```bash
 aws secretsmanager put-secret-value \
-    --secret-id <DeepgramSecretArn from stack output> \
-    --secret-string '{"apiToken": "your-deepgram-api-key-here"}'
+    --secret-id <SecretArn from stack output> \
+    --secret-string '{"apiToken": "your-api-key-here"}'
 ```
 
 Finally, enable Lex Bot Management in the Connect console: open your instance → **Flows** → under *Lex bots configuration*, tick **Enable Lex Bot Management in Amazon Connect** → **Save**.
@@ -281,7 +284,6 @@ Then dial the claimed number to hit the customer support flow, or invoke the out
 
 `cdk destroy AgenticConnectStack` will tear down all resources. A few things to be aware of:
 
-- The Deepgram secret and its KMS key are configured with `RemovalPolicy.RETAIN` — they persist across stack deletes so an accidentally-deleted stack doesn't take an API key with it. Delete them manually via the console or CLI if you want them gone.
 - The Lex V2 SLR is not destroyed (it's account-scoped and shared).
 - If a stack delete gets stuck on a Security Profile "in use" error, the AI agent hasn't finished tearing down its version-qualified associations yet — retry the delete after a minute, or delete the affected AI agent directly via `aws qconnect delete-ai-agent`.
 

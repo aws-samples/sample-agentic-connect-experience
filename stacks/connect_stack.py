@@ -23,26 +23,43 @@ class ConnectStack(Stack):
     VOICE_PARAMETERS = {
         'deepgram': {
             "TextToSpeechVoice": "$.DataTables.LangConfig.deepgram_voice",
-            "TextToSpeechEngine": "deepgram:aura-2",
+            "TextToSpeechEngine": "$.DataTables.LangConfig.deepgram_model",
+            "ExternalCredentialSecretARN": ""
+        },
+        'elevenlabs': {
+            "TextToSpeechVoice": "$.DataTables.LangConfig.elevenlabs_voice",
+            "TextToSpeechEngine": "$.DataTables.LangConfig.elevenlabs_model",
             "ExternalCredentialSecretARN": ""
         },
         'amazon': {
             "TextToSpeechVoice": "$.DataTables.LangConfig.amazon_voice",
-            "TextToSpeechEngine": "$.DataTables.LangConfig.amazon_speaking_engine",
-            "TextToSpeechStyle": "$.DataTables.LangConfig.amazon_speaking_style"
+            "TextToSpeechEngine": "$.DataTables.LangConfig.amazon_model",
         }
     }
 
     TTS_PARAMETERS = {
         'deepgram': {
             "TextToSpeechEngine": {
+                "useDynamic": True,
                 "voiceProvider": "deepgram"
             },
             "TextToSpeechVoice": {
                 "useDynamic": True
             }
         },
+        'elevenlabs': {
+            "TextToSpeechEngine": {
+                "useDynamic": True,
+                "voiceProvider": "elevenlabs"
+            },
+            "TextToSpeechVoice": {
+                "useDynamic": True
+            }
+        },
         'amazon': {
+            "TextToSpeechEngine": {
+                "voiceProvider": "connect:agentic"
+            },
             "TextToSpeechVoice": {
                 "useDynamic": True,
                 "languageCode": "$.DataTables.LangConfig.language_code"
@@ -64,7 +81,7 @@ class ConnectStack(Stack):
         connect_pattern = ConnectPattern(
             self, 'ConnectPattern',
             ConnectPatternProps(
-                voice_provider='deepgram',
+                voice_provider='amazon',
                 country_code_detection_fallback='+1',
                 data_tables=[
                     ConnectPatternProps.DataTable(
@@ -98,7 +115,11 @@ class ConnectStack(Stack):
                             self, "ConnectAdminPassword",
                             type="String",
                             no_echo=True,
-                            min_length=6,
+                            allowed_pattern=r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$",
+                            constraint_description=(
+                                "Password must be 8-64 characters and contain at least one "
+                                "uppercase letter, one lowercase letter, and one number."
+                            ),
                         ).value_as_string
                     ),
                 ),
@@ -250,8 +271,8 @@ class ConnectStack(Stack):
         voice_parameters = self.VOICE_PARAMETERS[connect_pattern.voice_provider]
         data_table_id = Fn.select(3, Fn.split("/", data_table.attr_arn))
 
-        if connect_pattern.voice_provider == 'deepgram':
-            voice_parameters['ExternalCredentialSecretARN'] = connect_pattern.deepgram_secret.secret_arn
+        if connect_pattern.voice_provider != 'amazon':
+            voice_parameters['ExternalCredentialSecretARN'] = connect_pattern.voice_provider_secret.secret_arn
 
         replacements = {
             '${WISDOM_ASSISTANT_ARN}': connect_pattern.assistant.attr_assistant_arn,

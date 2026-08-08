@@ -10,7 +10,7 @@ from aws_cdk import (
 from dataclasses import dataclass, field
 from typing import List, Optional, Literal, Dict
 
-SUPPORTED_VOICE_PROVIDERS = Literal["amazon", "deepgram"]
+SUPPORTED_VOICE_PROVIDERS = Literal["amazon", "deepgram", "elevenlabs"]
 
 DEFAULT_LANG_DEFINITION = {
     "+1": {
