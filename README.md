@@ -1,6 +1,6 @@
 # Agentic Connect Experience
 
-A reusable CDK construct — `ConnectPattern` — for building agentic Amazon Connect experiences with knowledge-base retrieval, MCP tool calling via Bedrock AgentCore Gateways, dynamic multi-language voice, and both inbound and campaign-style outbound flows. This repository contains the construct itself plus a sample stack (`AgenticConnectStack`) that provisions a complete end-to-end demo — an EV charger customer support line — to show how the pieces fit together.
+A reusable CDK construct — `ConnectPattern` — for building agentic Amazon Connect experiences with knowledge-base retrieval, MCP tool calling via Bedrock AgentCore Gateways, dynamic multi-language voice with Deepgram and ElevenLabs integration, and both inbound and campaign-style outbound flows. This repository contains the construct itself plus a sample stack (`AgenticConnectStack`) that provisions a complete end-to-end demo — an EV charger customer support line — to show how the pieces fit together.
 
 The intent is that consumers of the pattern describe the experience they want as a `ConnectPatternProps` value and get a working Connect instance in one deploy, without hand-wiring Wisdom, Lex, AgentCore, Customer Profiles, Data Tables, and the surrounding IAM and integration-association plumbing.
 
@@ -109,6 +109,22 @@ The row is described in `assets/connect/customer_support_data_table_definition.j
 At contact time the flow reads the row keyed by the caller's country code and drives every language-dependent behavior from those columns: TTS voice/engine, spoken prompts, and the `language_name` value injected into the Q in Connect prompt as `$.Custom.language_name`. Adding a new language means adding a row to the table definition — no changes to the contact flow, the pattern, or the orchestration prompt.
 
 The pattern accepts multiple Data Tables. The sample uses two — one for customer support, one for the technician-visit flow — so each experience can carry its own language-scoped configuration without cross-contamination.
+
+> **Heads-up: ElevenLabs library voices on the free tier**
+>
+> If you set `voice_provider="elevenlabs"` and configure a voice ID copied straight from the ElevenLabs Voice Library (like the ones defined above), the first call to your contact flow will fail at the `PlayPrompt` block with an HTTP 401 from ElevenLabs:
+>
+> ```json
+> {
+>   "detail": {
+>     "type": "payment_required",
+>     "code": "paid_plan_required",
+>     "message": "Free users cannot use library voices via the API. Please upgrade your subscription to use this voice."
+>   }
+> }
+> ```
+>
+> This isn't a bug in the pattern — it's how ElevenLabs meters free-tier accounts. Library voices are browsable but not directly callable via API unless your account is on Starter tier or above.
 
 ### Automatic country-code extraction with fallback
 
